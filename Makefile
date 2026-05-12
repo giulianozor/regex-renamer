@@ -21,10 +21,6 @@ install: build
 uninstall:
 	rm -f $(BINDIR)/$(BINARY)
 
-## clean: remove build artefacts
-clean:
-	rm -f $(BINARY)
-
 ## test: run all tests
 test:
 	go test ./...
