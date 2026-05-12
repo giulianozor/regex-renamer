@@ -1,0 +1,22 @@
+# rren sample configuration file
+# Copy to ~/.config/rren.yaml and adjust to your needs.
+#
+# Each rule has:
+#   pattern     - Go regular expression to match against the file/folder name
+#   replacement - Replacement string (use $1, ${1}, $name for capture groups)
+#   apply_to    - What to apply to: files | folders | both  (default: both)
+#   description - Optional human-readable description of the rule
+
+rules:
+  # TV show: "show.name.S01E02.720p.mkv" -> "S01E02.mkv"
+  # Also handles lowercase/mixed case episode markers (e.g. 1x02, 1X02)
+  - description: "TV show episode normalisation"
+    pattern: '.*(\d\d)[exEX](\d+).*\.(\w+)'
+    replacement: 'S${1}E${2}.${3}'
+    apply_to: files
+
+  # Movie: "Movie Title (2023) BluRay.mkv" -> "2023 - Movie Title.mkv"
+  - description: "Movie year-first rename"
+    pattern: '(.*)\s\((\d{4})\).*(\.m..)'
+    replacement: '$2 - $1$3'
+    apply_to: files
